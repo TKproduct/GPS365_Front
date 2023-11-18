@@ -8,7 +8,7 @@ import SocketController from './SocketController';
 import CachingController from './CachingController';
 import { useEffectAsync } from './reactHelper';
 import { sessionActions } from './store';
-import Animation from './Animation.json';
+import Animation from './Animation4.json';
 import Lottie from 'lottie-react';
 import { useState, useEffect } from 'react';
 
