@@ -35,12 +35,21 @@ const App = () => {
   const initialized = useSelector((state) => !!state.session.user);
 
   useEffectAsync(async () => {
-    const timer = setTimeout(() => {
-      setShowAnimation(false);
+    
+    setShowAnimation(false);
+    const response = await fetch('/api/session');
     if (!initialized) {
-        navigate('/login');
+      if (response.ok) {
+        dispatch(sessionActions.updateUser(await response.json()));
+      }else{
+        const timer = setTimeout(() => {
+          setShowAnimation(true);
+            navigate('/login');
+          
+        }, 5000);
+      }        
       }
-    }, 5000);
+    
     return null;
   }, [initialized, newServer, navigate]);
 
