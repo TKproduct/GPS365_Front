@@ -8,7 +8,7 @@ import SocketController from './SocketController';
 import CachingController from './CachingController';
 import { useEffectAsync } from './reactHelper';
 import { sessionActions } from './store';
-import Animation from './Animation.json';
+import Animation from './Animation4.json';
 import Lottie from 'lottie-react';
 import { useState, useEffect } from 'react';
 
@@ -35,12 +35,21 @@ const App = () => {
   const initialized = useSelector((state) => !!state.session.user);
 
   useEffectAsync(async () => {
-    const timer = setTimeout(() => {
-      setShowAnimation(false);
+    
+    setShowAnimation(false);
+    const response = await fetch('/api/session');
     if (!initialized) {
-        navigate('/login');
+      if (response.ok) {
+        dispatch(sessionActions.updateUser(await response.json()));
+      }else{
+        const timer = setTimeout(() => {
+          setShowAnimation(true);
+            navigate('/login');
+          
+        }, 5000);
+      }        
       }
-    }, 5000);
+    
     return null;
   }, [initialized, newServer, navigate]);
 
