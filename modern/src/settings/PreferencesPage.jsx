@@ -65,8 +65,8 @@ const PreferencesPage = () => {
   const user = useSelector((state) => state.session.user);
   const [attributes, setAttributes] = useState(user.attributes);
 
-  const versionApp = import.meta.env.VITE_APP_VERSION.slice(0, -2);
-  const versionServer = useSelector((state) => state.session.server.version);
+  const versionApp = 'GPS365 1.0';
+  const versionServer = 'GPS365 1.0';
   const socket = useSelector((state) => state.session.socket);
 
   const [token, setToken] = useState(null);
